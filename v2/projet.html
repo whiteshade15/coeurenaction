@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projet — Cœur en Action ASBL</title>
+<meta name="description" content="Découvrez ce projet humanitaire de Cœur en Action et soutenez-le en quelques clics.">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="projets">
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header id="entete"></header>
+
+<main id="contenu" class="cadre">
+  <p class="fil"><a href="projets.html">Nos projets</a> › <span id="fil-titre"></span></p>
+  <div class="projet-page">
+    <article>
+      <span class="lieu" id="p-lieu"></span>
+      <h1 id="p-titre" style="font-size:clamp(2.6rem,6.5vw,5rem);margin-top:.4rem"></h1>
+      <div class="visuel-grand" id="p-visuel"></div>
+      <div id="p-texte" style="font-size:1.15rem"></div>
+      <h2 style="font-size:2.2rem;margin:2rem 0 1rem">Ce que permet votre don</h2>
+      <ul class="impacts" id="p-impacts"></ul>
+      <p class="discret" style="font-size:1rem">Photos et vidéos de la réalisation seront publiées ici dès que le projet est terminé. Les donateurs les reçoivent par e-mail.</p>
+      <p><button class="btn" type="button" id="partager">Partager ce projet</button> <span id="partage-etat" role="status" class="discret"></span></p>
+    </article>
+    <aside class="colonne-don">
+      <div id="p-jauge" style="margin-bottom:1.2rem"></div>
+      <form class="don-rapide" id="don-rapide" aria-label="Soutenir ce projet" novalidate>
+        <h2>Soutenir ce projet</h2>
+        <div class="bascule" role="radiogroup" aria-label="Fréquence du don">
+          <label><input type="radio" name="frequence" value="unique" checked>Une fois</label>
+          <label><input type="radio" name="frequence" value="mensuel">Chaque mois</label>
+        </div>
+        <div class="montants" role="radiogroup" aria-label="Montant" id="montants-projet"></div>
+        <label class="champ montant-libre"><span class="sr">Autre montant</span><input type="number" name="libre" min="1" step="1" inputmode="numeric" placeholder="Autre montant"></label>
+        <p class="impact-ligne" aria-live="polite"></p>
+        <button class="btn btn-don btn-plein" type="submit">Continuer</button>
+      </form>
+    </aside>
+  </div>
+</main>
+<footer id="pied"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var p=projetParId(new URLSearchParams(location.search).get("id"))||CEA.projets[0];
+  document.title=p.titre+" — Cœur en Action ASBL";
+  document.getElementById("fil-titre").textContent=p.titre;
+  document.getElementById("p-lieu").textContent=p.lieu;
+  document.getElementById("p-titre").textContent=p.titre;
+  document.getElementById("p-visuel").innerHTML=p.image?'<img src="assets/'+p.image+'" alt="Action de terrain de Cœur en Action liée à ce projet">':'<div class="couverture" style="background:'+p.couleur+';font-size:clamp(3rem,9vw,6rem)">'+esc(p.domaine)+'</div>';
+  document.getElementById("p-texte").innerHTML=p.texte.map(function(t){return "<p>"+esc(t)+"</p>";}).join("");
+  document.getElementById("p-impacts").innerHTML=p.impacts.map(function(i){return "<li><strong>"+i[0]+" €</strong><span>"+esc(i[1])+"</span></li>";}).join("");
+  if(p.objectif){var pct=Math.min(100,Math.round(p.collecte/p.objectif*100));
+    document.getElementById("p-jauge").innerHTML='<div class="jauge" role="progressbar" aria-label="Collecte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><span data-pct="'+pct+'"></span></div><div class="chiffres" style="margin-top:.5rem"><span><strong>'+eur(p.collecte)+'</strong> sur '+eur(p.objectif)+'</span><span>'+p.donateurs+' donateurs</span></div>';
+    animerJauges();}
+  document.getElementById("montants-projet").innerHTML=suggestions(p).map(function(v){return '<label><input type="radio" name="montant" value="'+v+'"'+(v===p.impacts[1][0]?" checked":"")+'>'+v+' €</label>';}).join("");
+  initDonRapide(document.getElementById("don-rapide"),p.id);
+  document.getElementById("partager").addEventListener("click",function(){
+    var d={title:p.titre,text:p.resume,url:location.href}, s=document.getElementById("partage-etat");
+    if(navigator.share){navigator.share(d).catch(function(){});}
+    else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(function(){s.textContent="Lien copié.";});}
+  });
+})();
+</script>
+</body>
+</html>

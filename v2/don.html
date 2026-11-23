@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faire un don — Cœur en Action ASBL</title>
+<meta name="description" content="Faites un don sécurisé à Cœur en Action : Bancontact, Bancontact Pay, Wero, carte, Apple Pay ou virement. Sadaqa, zakat, sadaqa jariya, don unique ou mensuel.">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="don">
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header id="entete"></header>
+
+<main id="contenu" class="cadre">
+  <div class="parcours">
+    <form id="form-don" novalidate>
+      <h1 style="font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:1.4rem">Faire un don</h1>
+      <ol class="progression" aria-label="Étapes du don">
+        <li data-p="1" aria-current="step">1. Mon don</li>
+        <li data-p="2">2. Mes coordonnées</li>
+        <li data-p="3">3. Paiement</li>
+      </ol>
+
+      <!-- Étape 1 -->
+      <section class="etape" data-etape="1" aria-labelledby="e1">
+        <fieldset>
+          <legend id="e1">Type de don</legend>
+          <div class="choix-liste">
+            <label class="choix"><input type="radio" name="type" value="sadaqa" checked><span><span class="titre">Sadaqa</span><span class="sous">Don volontaire, pour le projet de votre choix.</span></span></label>
+            <label class="choix"><input type="radio" name="type" value="zakat"><span><span class="titre">Zakat al-maal</span><span class="sous">Affectée uniquement aux bénéficiaires de la zakat. <a class="lien" href="zakat.html">Calculer ma zakat</a></span></span></label>
+            <label class="choix"><input type="radio" name="type" value="sadaqa-jariya"><span><span class="titre">Sadaqa jariya</span><span class="sous">Un bienfait durable : puits, école, soins. Possible au nom d'un proche.</span></span></label>
+            <label class="choix"><input type="radio" name="type" value="zakat-fitr"><span><span class="titre">Zakat al-fitr</span><span class="sous">À verser avant la prière de l'Aïd, par membre du foyer.</span></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Projet</legend>
+          <label class="champ"><span class="sr">Projet soutenu</span><select name="projet" id="projet"></select><small id="projet-info"></small></label>
+        </fieldset>
+
+        <fieldset id="bloc-frequence">
+          <legend>Fréquence</legend>
+          <div class="bascule" role="radiogroup" aria-label="Fréquence du don" style="max-width:26rem">
+            <label><input type="radio" name="frequence" value="unique" checked>Une fois</label>
+            <label><input type="radio" name="frequence" value="mensuel">Chaque mois</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Montant</legend>
+          <div id="bloc-fitr" hidden>
+            <label class="champ"><span>Nombre de personnes dans le foyer</span><input type="number" name="personnes" min="1" value="1" inputmode="numeric" style="max-width:10rem"><small id="fitr-info"></small></label>
+          </div>
+          <div id="bloc-montant">
+            <div class="montants" role="radiogroup" aria-label="Montant suggéré" id="montants"></div>
+            <label class="champ montant-libre" style="max-width:20rem"><span class="sr">Autre montant</span><input type="number" name="libre" min="1" step="1" inputmode="numeric" placeholder="Autre montant"></label>
+          </div>
+          <p class="impact-ligne" id="impact" aria-live="polite"></p>
+          <p class="erreur" id="err1" role="alert"></p>
+        </fieldset>
+        <div class="navigation-etapes"><span></span><button class="btn btn-don" type="button" data-suivant="2">Continuer</button></div>
+      </section>
+
+      <!-- Étape 2 -->
+      <section class="etape" data-etape="2" aria-labelledby="e2" hidden>
+        <fieldset>
+          <legend id="e2">Mes coordonnées</legend>
+          <div class="deux">
+            <label class="champ"><span>Prénom</span><input type="text" name="prenom" autocomplete="given-name" required></label>
+            <label class="champ"><span>Nom</span><input type="text" name="nom" autocomplete="family-name" required></label>
+          </div>
+          <label class="champ"><span>E-mail</span><input type="email" name="email" autocomplete="email" required><small>Pour votre reçu et des nouvelles du projet soutenu.</small></label>
+          <label class="champ"><span>Téléphone (facultatif)</span><input type="tel" name="tel" autocomplete="tel"></label>
+        </fieldset>
+
+        <fieldset id="bloc-dedicace">
+          <legend>Dédier ce don (facultatif)</legend>
+          <label class="champ"><span>Au nom de</span><input type="text" name="dedicace" placeholder="Ex. : ma mère, Fatima"><small>Pour une sadaqa jariya au nom d'un proche, vivant ou disparu. Le nom figure sur votre reçu.</small></label>
+        </fieldset>
+
+        <fieldset id="bloc-fiscal" hidden>
+          <legend>Attestation fiscale</legend>
+          <label class="case"><input type="checkbox" name="attestation" id="attestation"><span>Je souhaite une attestation fiscale. Elle donne droit à une réduction d'impôt de 30 % si mes dons atteignent 40 € sur l'année.</span></label>
+          <div id="champs-fiscal" hidden>
+            <label class="champ"><span>Adresse complète</span><input type="text" name="adresse" autocomplete="street-address"></label>
+            <label class="champ"><span>Numéro de registre national</span><input type="text" name="nn" inputmode="numeric" autocomplete="off" placeholder="00.00.00-000.00"><small>Exigé par la loi pour délivrer l'attestation. Il est transmis uniquement au SPF Finances.</small></label>
+          </div>
+        </fieldset>
+
+        <label class="case"><input type="checkbox" name="anonyme"><span>Ne pas afficher mon prénom dans les donateurs du projet.</span></label>
+        <label class="case"><input type="checkbox" name="news"><span>Recevoir des nouvelles du terrain par e-mail (une fois par mois).</span></label>
+        <p class="erreur" id="err2" role="alert"></p>
+        <div class="navigation-etapes"><button class="btn" type="button" data-suivant="1">Retour</button><button class="btn btn-don" type="button" data-suivant="3">Continuer</button></div>
+      </section>
+
+      <!-- Étape 3 -->
+      <section class="etape" data-etape="3" aria-labelledby="e3" hidden>
+        <fieldset>
+          <legend id="e3">Moyen de paiement</legend>
+          <div class="choix-liste" id="moyens"></div>
+        </fieldset>
+        <div id="info-virement" hidden>
+          <div class="qr-pay"><img src="assets/qr-virement.svg" alt="Code QR de virement vers le compte de Cœur en Action"><p>Scannez avec l'app de votre banque, ou faites un virement vers <strong>BE62 9502 3442 2861</strong>, communication « <span id="com-virement">Don</span> ».</p></div>
+        </div>
+        <label class="case"><input type="checkbox" name="cgv" id="cgv"><span>J'accepte que mes données servent à traiter mon don, comme expliqué dans la <a class="lien" href="a-propos.html#confidentialite">politique de confidentialité</a>.</span></label>
+        <p class="erreur" id="err3" role="alert"></p>
+        <div class="navigation-etapes"><button class="btn" type="button" data-suivant="2">Retour</button><button class="btn btn-don" type="submit" id="payer">Donner</button></div>
+        <p class="securite">Paiement sécurisé par notre prestataire de paiement agréé. Vos données bancaires ne passent jamais par notre site.</p>
+      </section>
+
+      <!-- Confirmation -->
+      <section class="etape confirmation" data-etape="4" hidden tabindex="-1" id="confirmation">
+        <div class="coche" aria-hidden="true">✓</div>
+        <h2>Jazak Allahu khayran, <span id="merci-prenom"></span></h2>
+        <p id="merci-texte"></p>
+        <p class="discret">Démo : aucun paiement n'a été effectué. À la mise en ligne, cette page s'affichera après la confirmation du paiement.</p>
+        <p><a class="btn" href="projets.html">Voir les autres projets</a></p>
+      </section>
+    </form>
+
+    <aside class="recap" aria-labelledby="titre-recap">
+      <h2 id="titre-recap">Votre don</h2>
+      <dl>
+        <div><dt>Type</dt><dd id="r-type"></dd></div>
+        <div><dt>Projet</dt><dd id="r-projet"></dd></div>
+        <div><dt>Fréquence</dt><dd id="r-freq"></dd></div>
+        <div class="total"><dt>Montant</dt><dd id="r-montant"></dd></div>
+      </dl>
+      <p class="securite" id="r-fiscal"></p>
+    </aside>
+  </div>
+</main>
+
+<footer id="pied"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/don.js"></script>
+</body>
+</html>

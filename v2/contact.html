@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact et bénévolat — Cœur en Action ASBL</title>
+<meta name="description" content="Contactez Cœur en Action ou devenez bénévole : distributions de repas, maraudes à Bruxelles, soutien scolaire, missions humanitaires.">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header id="entete"></header>
+
+<main id="contenu">
+  <section class="cadre bloc">
+    <h1 style="margin-bottom:2rem">Contact</h1>
+    <dl class="coord">
+      <div><dt>Téléphone, 7 jours sur 7</dt><dd><a class="lien" href="tel:+32477305441">+32 477 30 54 41</a><br><a class="lien" href="tel:+32465909551">+32 465 90 95 51</a></dd></div>
+      <div><dt>E-mail</dt><dd><a class="lien" href="mailto:coeurenaction@hotmail.com">coeurenaction@hotmail.com</a></dd></div>
+      <div><dt>Adresse</dt><dd>Rue Stroobants 62<br>1140 Bruxelles (Evere)</dd></div>
+      <div><dt>WhatsApp</dt><dd><a class="lien" href="https://wa.me/32477305441" rel="noopener">Nous écrire sur WhatsApp</a></dd></div>
+    </dl>
+  </section>
+
+  <section class="bloc fond-sable" id="benevolat" aria-labelledby="titre-benevolat">
+    <div class="cadre deux-col">
+      <div>
+        <h2 id="titre-benevolat">Devenir bénévole</h2>
+        <p style="margin-top:1.2rem">Une heure par mois ou une mission à l'étranger : chaque main tendue compte. Dites-nous ce qui vous intéresse, nous vous recontactons.</p>
+      </div>
+      <form id="form-benevole" novalidate>
+        <div class="deux">
+          <label class="champ"><span>Prénom et nom</span><input type="text" name="nom" autocomplete="name" required></label>
+          <label class="champ"><span>Téléphone</span><input type="tel" name="tel" autocomplete="tel" required></label>
+        </div>
+        <label class="champ"><span>E-mail</span><input type="email" name="email" autocomplete="email" required></label>
+        <fieldset style="margin-bottom:1rem"><legend style="font-family:var(--texte);font-weight:700;font-size:1rem;margin-bottom:.5rem">Je suis intéressé·e par</legend>
+          <label class="case"><input type="checkbox" name="mission" value="Distribution de repas"><span>Distribution de repas</span></label>
+          <label class="case"><input type="checkbox" name="mission" value="Maraudes à Bruxelles"><span>Maraudes à Bruxelles</span></label>
+          <label class="case"><input type="checkbox" name="mission" value="Soutien scolaire"><span>Soutien scolaire</span></label>
+          <label class="case"><input type="checkbox" name="mission" value="Missions à l'étranger"><span>Missions à l'étranger</span></label>
+        </fieldset>
+        <label class="champ"><span>Message (facultatif)</span><textarea name="message"></textarea></label>
+        <button class="btn btn-don" type="submit">Envoyer ma candidature</button>
+        <p class="erreur" id="b-etat" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+<footer id="pied"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+document.getElementById("form-benevole").addEventListener("submit",function(e){
+  e.preventDefault(); var f=e.target, s=document.getElementById("b-etat");
+  for(var i=0;i<f.elements.length;i++){var c=f.elements[i];if(c.required&&(!c.value.trim()||!c.checkValidity())){s.style.color="";s.textContent="Le champ « "+c.closest("label").querySelector("span").textContent+" » est obligatoire ou mal rempli.";c.focus();return;}}
+  var missions=[].map.call(f.querySelectorAll("[name=mission]:checked"),function(x){return x.value;}).join(", ")||"non précisé";
+  var corps="Nom : "+f.nom.value+"\nTéléphone : "+f.tel.value+"\nE-mail : "+f.email.value+"\nIntéressé par : "+missions+"\n\n"+f.message.value;
+  location.href="mailto:"+CEA.config.email+"?subject="+encodeURIComponent("Candidature bénévole – "+f.nom.value)+"&body="+encodeURIComponent(corps);
+  s.style.color="var(--vert)"; s.textContent="Votre application e-mail s'ouvre avec la candidature prête à envoyer.";
+});
+</script>
+</body>
+</html>

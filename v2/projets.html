@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nos projets — Cœur en Action ASBL</title>
+<meta name="description" content="Tous les projets humanitaires de Cœur en Action : eau, alimentation, éducation, santé et aide aux sans-abris. Suivez chaque collecte en direct.">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="projets">
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header id="entete"></header>
+
+<main id="contenu" class="cadre bloc">
+  <h1>Nos projets</h1>
+  <p style="font-size:1.2rem;margin:1rem 0 2rem">Choisissez le projet qui vous tient à cœur. Les projets marqués « Sadaqa jariya » sont des bienfaits durables ; ceux marqués « Éligible zakat » peuvent recevoir votre zakat.</p>
+  <div class="filtres" role="group" aria-label="Filtrer les projets">
+    <button type="button" data-filtre="tous" aria-pressed="true">Tous</button>
+    <button type="button" data-filtre="urgence" aria-pressed="false">Urgents</button>
+    <button type="button" data-filtre="jariya" aria-pressed="false">Sadaqa jariya</button>
+    <button type="button" data-filtre="Belgique" aria-pressed="false">En Belgique</button>
+  </div>
+  <div class="grille-projets" id="liste" aria-live="polite"></div>
+</main>
+<footer id="pied"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var l=document.getElementById("liste");
+  l.innerHTML=CEA.projets.map(carteProjet).join(""); animerJauges(l);
+  document.querySelectorAll("[data-filtre]").forEach(function(b){b.addEventListener("click",function(){
+    document.querySelectorAll("[data-filtre]").forEach(function(x){x.setAttribute("aria-pressed",x===b);});
+    var v=b.dataset.filtre;
+    l.querySelectorAll(".projet").forEach(function(c){
+      c.hidden = !(v==="tous" || (v==="urgence"&&c.dataset.urgence==="true") || (v==="jariya"&&c.dataset.jariya==="true") || c.dataset.domaine===v);
+    });
+  });});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+/* Données du site — à mettre à jour par l'association.
+   Tant que DEMO = true, un bandeau signale que les chiffres sont des exemples. */
+window.CEA = {
+  config: {
+    DEMO: true,
+    nom: "Cœur en Action ASBL",
+    iban: "BE62 9502 3442 2861",
+    bce: null,                 // n° d'entreprise, ex. "0xxx.xxx.xxx"
+    agrementFiscal: false,     // true seulement si l'ASBL est agréée (attestation fiscale 281.71)
+    tauxReduction: 0.30,       // réduction d'impôt depuis le 01/01/2025
+    seuilAttestation: 40,      // € par an et par association
+    zakatAlFitrParPersonne: null, // montant fixé par l'association (€), null = à compléter
+    nisabGrammesOr: 85,
+    tauxZakat: 0.025,
+    email: "coeurenaction@hotmail.com",
+    tel: ["+32 477 30 54 41", "+32 465 90 95 51"],
+    adresse: "Rue Stroobants 62, 1140 Bruxelles",
+    reseaux: {
+      facebook: "https://www.facebook.com/coeurenactionasbl",
+      instagram: "https://www.instagram.com/coeur_en_action_asbl",
+      tiktok: "https://www.tiktok.com/@coeurenaction_asbl"
+    },
+    videos: ["1061862979?h=6a91ef5f69","1061991233","1061991452","1061991667","1061991866","1061992091","1061992283","1061992493","1061992682"]
+  },
+
+  /* Montants, objectifs et lieux : EXEMPLES à remplacer par les vrais chiffres. */
+  projets: [
+    {
+      id: "puits", domaine: "Eau", titre: "Forer des puits d'eau potable",
+      lieu: "Afrique de l'Ouest (à préciser)", couleur: "#0E5A8A", image: null,
+      resume: "Un puits donne de l'eau propre à tout un village, pour des années.",
+      texte: [
+        "L'eau est vitale, mais trop de populations en sont encore privées. Nous forons des puits et installons des systèmes de distribution pour garantir un accès durable à une eau propre.",
+        "C'est moins de maladies liées à l'eau, de meilleures conditions de vie, et du temps rendu aux enfants qui allaient chercher l'eau au lieu d'aller à l'école."
+      ],
+      objectif: 8000, collecte: 3150, donateurs: 64, jariya: true, zakat: true, urgence: false,
+      impacts: [[50,"participe au forage d'un puits"],[250,"finance la pompe manuelle"],[1500,"un puits complet, à votre nom ou à celui d'un proche"]]
+    },
+    {
+      id: "colis", domaine: "Alimentation", titre: "Colis alimentaires pour les familles",
+      lieu: "Maroc et Afrique subsaharienne", couleur: "#B4531A", image: "terrain-distribution.jpg",
+      resume: "Des colis de base pour nourrir une famille pendant plusieurs semaines.",
+      texte: [
+        "Personne ne devrait souffrir de la faim. Nous distribuons des colis alimentaires et des repas chauds aux familles démunies et aux plus vulnérables.",
+        "Un repas, c'est plus qu'une assiette : c'est du réconfort, de la dignité et de l'espoir."
+      ],
+      objectif: 5000, collecte: 4120, donateurs: 131, jariya: false, zakat: true, urgence: true,
+      impacts: [[30,"un colis de base pour une famille"],[60,"deux colis"],[150,"cinq familles nourries"]]
+    },
+    {
+      id: "ecole", domaine: "Éducation", titre: "Rénover une école et l'équiper",
+      lieu: "À préciser", couleur: "#5B3F8C", image: null,
+      resume: "Des classes rénovées, des cartables et des fournitures pour chaque élève.",
+      texte: [
+        "L'éducation est la clé d'un futur meilleur. Nous rénovons des écoles et fournissons du matériel scolaire aux enfants défavorisés.",
+        "Apprendre dans de bonnes conditions, avec un cartable et des fournitures, c'est une vraie chance d'échapper à la précarité."
+      ],
+      objectif: 12000, collecte: 2600, donateurs: 38, jariya: true, zakat: true, urgence: false,
+      impacts: [[25,"un cartable garni pour un élève"],[100,"le matériel d'une classe pour un mois"],[500,"la rénovation d'une salle de classe"]]
+    },
+    {
+      id: "sante", domaine: "Santé", titre: "Soins et médicaments pour les plus vulnérables",
+      lieu: "À préciser", couleur: "#0F7A4A", image: null,
+      resume: "Des médicaments et des soins là où il n'y a ni pharmacie ni médecin.",
+      texte: [
+        "L'accès aux soins est un droit fondamental. Nous construisons des cliniques et distribuons des médicaments là où les soins manquent.",
+        "De meilleures infrastructures et des traitements accessibles sauvent des vies et redonnent espoir."
+      ],
+      objectif: 10000, collecte: 1850, donateurs: 29, jariya: true, zakat: true, urgence: false,
+      impacts: [[40,"des médicaments essentiels pour une famille"],[120,"une journée de consultations"],[800,"l'équipement d'une salle de soins"]]
+    },
+    {
+      id: "sans-abris", domaine: "Belgique", titre: "Maraudes auprès des sans-abris à Bruxelles",
+      lieu: "Bruxelles", couleur: "#2B2B2B", image: "benevoles-terrain.jpg",
+      resume: "Repas chauds, vêtements et écoute dans les rues de Bruxelles.",
+      texte: [
+        "Vivre dans la rue, c'est affronter le froid, la faim et l'isolement. Nous apportons une aide concrète : repas, vêtements et solutions d'hébergement temporaire.",
+        "Et au-delà des besoins essentiels, du réconfort et de l'écoute. Personne ne devrait être laissé de côté."
+      ],
+      objectif: 3000, collecte: 2240, donateurs: 87, jariya: false, zakat: true, urgence: true,
+      impacts: [[15,"un repas chaud et une boisson"],[45,"un kit hiver (bonnet, gants, couverture)"],[100,"une maraude complète"]]
+    },
+    {
+      id: "general", domaine: "Partout", titre: "Là où le besoin est le plus grand",
+      lieu: "Belgique et international", couleur: "#F3162D", image: null,
+      resume: "Vous nous laissez choisir le projet le plus urgent du moment.",
+      texte: [
+        "Votre don va au projet qui en a le plus besoin au moment où il arrive : une urgence, un projet presque financé, une distribution à boucler.",
+        "C'est le don qui nous donne le plus de souplesse pour agir vite."
+      ],
+      objectif: null, collecte: null, donateurs: null, jariya: false, zakat: false, urgence: false,
+      impacts: [[20,"aide là où c'est le plus urgent"],[50,"une distribution complétée"],[100,"une action d'urgence lancée plus vite"]]
+    }
+  ]
+};

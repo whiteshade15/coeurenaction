@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de zakat — Cœur en Action ASBL</title>
+<meta name="description" content="Calculez votre zakat al-maal en quelques secondes (nisab, 2,5 %) et versez-la à Cœur en Action. Zakat al-fitr également.">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="zakat">
+<a class="saut" href="#contenu">Aller au contenu</a>
+<header id="entete"></header>
+
+<main id="contenu" class="cadre bloc">
+  <h1>Calculer ma zakat</h1>
+  <p style="font-size:1.2rem;margin:1rem 0 2.4rem">La zakat al-maal est due sur l'épargne qui a atteint le nisab et qui est restée en votre possession pendant une année lunaire (hawl). Son taux est de 2,5 %.</p>
+  <div class="calc">
+    <form id="calc" novalidate>
+      <fieldset>
+        <legend>1. Le nisab</legend>
+        <label class="champ"><span>Prix actuel d'un gramme d'or (€)</span><input type="number" name="or" min="0" step="0.01" inputmode="decimal" placeholder="Ex. : prix du jour"><small>Indiquez le cours du jour (or 24 carats). Nisab = 85 g d'or.</small></label>
+      </fieldset>
+      <fieldset>
+        <legend>2. Ce que vous possédez</legend>
+        <label class="champ"><span>Argent sur vos comptes et en espèces (€)</span><input type="number" name="liquide" min="0" inputmode="decimal"></label>
+        <label class="champ"><span>Épargne, placements, actions (€)</span><input type="number" name="epargne" min="0" inputmode="decimal"></label>
+        <label class="champ"><span>Or et argent métal, valeur actuelle (€)</span><input type="number" name="metaux" min="0" inputmode="decimal"></label>
+        <label class="champ"><span>Marchandises d'un commerce, argent prêté qui vous sera rendu (€)</span><input type="number" name="autres" min="0" inputmode="decimal"></label>
+      </fieldset>
+      <fieldset>
+        <legend>3. Ce que vous devez</legend>
+        <label class="champ"><span>Dettes à rembourser maintenant (€)</span><input type="number" name="dettes" min="0" inputmode="decimal"><small>Factures dues, échéances immédiates. Pas le capital total d'un prêt à long terme.</small></label>
+      </fieldset>
+    </form>
+    <aside class="resultat" aria-live="polite">
+      <span>Votre zakat al-maal</span>
+      <div class="grand" id="z-montant">0 €</div>
+      <p id="z-detail">Remplissez le formulaire pour voir le résultat.</p>
+      <a class="btn btn-don btn-plein" id="z-payer" href="don.html?type=zakat">Verser ma zakat</a>
+    </aside>
+  </div>
+  <p class="note">Ce calcul est indicatif et suit l'avis le plus répandu. Pour un cas particulier (entreprise, immobilier locatif, dettes importantes), demandez conseil à un imam ou à un savant de confiance.</p>
+
+  <section id="fitr" class="bloc" aria-labelledby="titre-fitr" style="padding-bottom:0">
+    <div class="deux-col">
+      <div>
+        <h2 id="titre-fitr">Zakat al-fitr</h2>
+        <p>Obligatoire pour chaque membre du foyer, enfants compris, elle se verse avant la prière de l'Aïd al-Fitr. Nous la distribuons aux familles dans le besoin pour qu'elles puissent, elles aussi, célébrer l'Aïd.</p>
+        <p id="fitr-montant"></p>
+        <a class="btn btn-don" href="don.html?type=zakat-fitr">Payer la zakat al-fitr</a>
+      </div>
+      <div class="faq">
+        <details><summary>Qui peut recevoir la zakat ?</summary><div><p>Les huit catégories citées dans le Coran (sourate At-Tawba, verset 60), dont les pauvres (fuqara) et les nécessiteux (masakin). Nous n'utilisons la zakat que pour ces bénéficiaires.</p></div></details>
+        <details><summary>Ma zakat sert-elle aux frais de l'association ?</summary><div><p><span class="a-completer">À compléter par l'association</span> La politique zakat de l'ASBL sera publiée ici, avec le nom de l'imam ou du savant qui l'a validée.</p></div></details>
+        <details><summary>Puis-je payer ma zakat en plusieurs fois ?</summary><div><p>Oui. Vous pouvez faire plusieurs dons de type « Zakat » au cours de l'année ; ils sont tous affectés à la zakat.</p></div></details>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="pied"></footer>
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var C=CEA.config, f=document.getElementById("calc"), v=function(n){return Math.max(0,parseFloat(f.elements[n].value)||0);};
+  document.getElementById("fitr-montant").innerHTML=C.zakatAlFitrParPersonne?"<strong>"+eur(C.zakatAlFitrParPersonne,2)+" par personne</strong>, montant fixé par l'association.":'<span class="a-completer">Montant par personne à fixer par l\'association</span>';
+  function calc(){
+    var total=v("liquide")+v("epargne")+v("metaux")+v("autres")-v("dettes"), or=v("or"), nisab=or*C.nisabGrammesOr;
+    var m=document.getElementById("z-montant"), d=document.getElementById("z-detail"), a=document.getElementById("z-payer");
+    if(!or){m.textContent="—";d.textContent="Indiquez le prix du gramme d'or pour connaître le nisab.";a.href="don.html?type=zakat";return;}
+    if(total<nisab){m.textContent="0 €";d.textContent="Votre patrimoine net ("+eur(total)+") est sous le nisab ("+eur(nisab)+"). Vous ne devez pas de zakat al-maal cette année. Vous pouvez donner une sadaqa.";a.textContent="Donner une sadaqa";a.href="don.html?type=sadaqa";return;}
+    var z=Math.round(total*C.tauxZakat*100)/100;
+    m.textContent=eur(z,2); d.textContent="2,5 % de votre patrimoine net de "+eur(total)+" (nisab : "+eur(nisab)+").";
+    a.textContent="Verser ma zakat"; a.href="don.html?type=zakat&projet=colis&montant="+z;
+  }
+  f.addEventListener("input",calc); calc();
+})();
+</script>
+</body>
+</html>

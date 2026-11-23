@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cœur en Action ASBL — association humanitaire à Bruxelles</title>
+<meta name="description" content="Cœur en Action ASBL aide les plus fragiles en Belgique et à l'international : puits et eau potable, colis alimentaires, écoles, soins de santé, aide aux sans-abris. Faites un don par virement.">
+<link rel="icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cœur en Action ASBL — De l'aide, du cœur, de l'action">
+<meta property="og:description" content="Eau potable, repas, écoles, soins et aide aux sans-abris, en Belgique et à l'international. Soutenez nos actions.">
+<meta property="og:image" content="assets/benevoles-terrain.jpg">
+<meta property="og:locale" content="fr_BE">
+<meta name="theme-color" content="#F3162D">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NGO","name":"Cœur en Action ASBL","url":"https://coeurenaction.org/","email":"coeurenaction@hotmail.com","telephone":"+32477305441","address":{"@type":"PostalAddress","streetAddress":"Rue Stroobants 62","postalCode":"1140","addressLocality":"Bruxelles","addressCountry":"BE"},"sameAs":["https://www.facebook.com/coeurenactionasbl","https://www.instagram.com/coeur_en_action_asbl","https://www.tiktok.com/@coeurenaction_asbl"]}
+</script>
+<style>
+@font-face{font-family:"Anton";src:url(assets/anton-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson";src:url(assets/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson";src:url(assets/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --rouge:#F3162D;      /* rouge du logo : aplats, grands éléments */
+  --rouge-texte:#C40E24;/* rouge lisible sur blanc (AA) */
+  --noir:#000;
+  --blanc:#fff;
+  --sable:#F2E8D8;      /* terre des photos de terrain */
+  --pierre:#57504A;     /* texte secondaire */
+  --display:"Anton", Impact, "Arial Narrow", sans-serif;
+  --texte:"Atkinson", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mesure:66ch;
+  --bord:clamp(1.1rem,4vw,3rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;font-family:var(--texte);font-size:1.125rem;line-height:1.6;color:var(--noir);background:var(--blanc);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.95;letter-spacing:.005em;margin:0}
+h2{font-size:clamp(2.6rem,7vw,5rem);line-height:1.02}
+p{margin:0 0 1em;max-width:var(--mesure)}
+:focus-visible{outline:3px solid var(--rouge);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.saut{position:absolute;left:1rem;top:-4rem;background:var(--noir);color:var(--blanc);padding:.6rem 1rem;z-index:50}
+.saut:focus{top:1rem}
+.cadre{padding-inline:var(--bord);max-width:84rem;margin-inline:auto}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;gap:.5rem;font:700 1.05rem/1 var(--texte);text-decoration:none;padding:1rem 1.4rem;border:2px solid var(--noir);border-radius:999px;background:var(--blanc);color:var(--noir);cursor:pointer}
+.btn:hover{background:var(--noir);color:var(--blanc)}
+.btn-don{background:var(--rouge);border-color:var(--rouge);color:var(--blanc)}
+.btn-don:hover{background:var(--noir);border-color:var(--noir)}
+
+/* En-tête */
+.entete{position:sticky;top:0;z-index:20;background:var(--blanc);border-bottom:1px solid #e6e0d6}
+.entete .cadre{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4.5rem}
+.logo img{height:2.9rem;width:auto}
+.nav{display:flex;align-items:center;gap:1.6rem}
+.nav a{text-decoration:none;font-weight:700;font-size:1rem}
+.nav a:not(.btn):hover{color:var(--rouge-texte);text-decoration:underline;text-underline-offset:.3em}
+.nav .btn{padding:.7rem 1.1rem}
+.menu-btn{display:none;background:none;border:2px solid var(--noir);border-radius:999px;font:700 1rem var(--texte);padding:.55rem 1rem;cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:inline-block}
+  .nav{display:none;position:absolute;left:0;right:0;top:4.5rem;flex-direction:column;align-items:flex-start;gap:0;background:var(--blanc);border-bottom:1px solid #e6e0d6;padding:.5rem var(--bord) 1.5rem}
+  .nav.ouvert{display:flex}
+  .nav a{padding:.8rem 0;font-size:1.15rem;width:100%}
+  .nav .btn{width:auto;margin-top:.6rem;padding:.9rem 1.3rem}
+}
+
+/* Accueil */
+.accueil{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(1.5rem,4vw,4rem);align-items:end;padding-block:clamp(2rem,6vw,5rem) clamp(2.5rem,6vw,5rem)}
+.accueil h1{font-size:clamp(3.6rem,11.5vw,9.5rem);line-height:.9;margin-bottom:1.6rem}
+.accueil h1 span{display:block}
+.accueil h1 span:nth-child(2){color:var(--rouge)}
+.accueil .intro{font-size:clamp(1.15rem,1.8vw,1.3rem);max-width:38ch}
+.actions-accueil{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+.accueil figure{margin:0;position:relative}
+.accueil figure img{width:100%;aspect-ratio:3/4.3;object-fit:cover;object-position:50% 40%;border-radius:200px 200px 8px 8px}
+.accueil figcaption{font-size:.9rem;color:var(--pierre);margin-top:.6rem}
+@media (prefers-reduced-motion:no-preference){
+  .accueil h1 span{animation:monte .7s cubic-bezier(.2,.7,.2,1) both}
+  .accueil h1 span:nth-child(2){animation-delay:.12s}
+  .accueil h1 span:nth-child(3){animation-delay:.24s}
+  @keyframes monte{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+}
+@media (max-width:760px){
+  .accueil{grid-template-columns:1fr}
+  .accueil figure img{aspect-ratio:4/3.4;border-radius:120px 120px 8px 8px}
+}
+
+/* Mission + domaines */
+.mission{background:var(--sable);padding-block:clamp(3.5rem,8vw,6.5rem)}
+.mission-tete{display:grid;grid-template-columns:1fr 1fr;gap:2rem 4rem;align-items:end;margin-bottom:2.5rem}
+.mission-tete p{margin:0}
+@media (max-width:760px){.mission-tete{grid-template-columns:1fr}}
+.domaines{list-style:none;margin:0;padding:0;border-top:2px solid var(--noir)}
+.domaines li{border-bottom:2px solid var(--noir)}
+.domaines summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(10ch,22rem) 1fr auto;gap:1.5rem;align-items:center;padding:1.4rem 0}
+.domaines summary::-webkit-details-marker{display:none}
+.domaines h3{font-size:clamp(2rem,4.5vw,3.3rem)}
+.domaines .resume{margin:0;color:var(--pierre)}
+.domaines .plus{width:2.6rem;height:2.6rem;border:2px solid var(--noir);border-radius:50%;display:grid;place-items:center;font:700 1.5rem/1 var(--texte);transition:transform .25s,background .25s,color .25s}
+.domaines details[open] .plus{transform:rotate(45deg);background:var(--rouge);border-color:var(--rouge);color:var(--blanc)}
+.domaines summary:hover h3{color:var(--rouge-texte)}
+.domaines .detail{padding:0 0 1.8rem;margin-left:min(calc(22rem + 1.5rem),30%)}
+.domaines .detail strong{font-weight:700}
+.domaines .devise{font-weight:700}
+@media (max-width:760px){
+  .domaines summary{grid-template-columns:1fr auto;gap:.4rem 1rem}
+  .domaines .resume{grid-column:1/2;grid-row:2;font-size:1rem}
+  .domaines .plus{grid-row:1/3;grid-column:2}
+  .domaines .detail{margin-left:0}
+}
+
+/* Bande photo */
+.bande{margin:0}
+.bande img{width:100%;height:clamp(16rem,42vw,34rem);object-fit:cover;object-position:50% 45%}
+.bande figcaption{padding:.7rem var(--bord);font-size:.9rem;color:var(--pierre);max-width:84rem;margin-inline:auto}
+
+/* Don : le bordereau */
+.don{background:var(--rouge);color:var(--blanc);padding-block:clamp(3.5rem,8vw,6.5rem)}
+.don-grille{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.don h2{margin-bottom:1.2rem}
+.don p{font-size:1.2rem}
+@media (max-width:860px){.don-grille{grid-template-columns:1fr}}
+.bordereau{background:var(--blanc);color:var(--noir);border-radius:14px;padding:clamp(1.3rem,3vw,2.2rem);box-shadow:0 22px 50px -18px rgba(90,0,10,.55);position:relative}
+.bordereau::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;border-radius:14px 14px 0 0;background:repeating-linear-gradient(90deg,var(--noir) 0 18px,transparent 18px 26px)}
+.ligne{display:grid;grid-template-columns:9.5rem 1fr;gap:.2rem 1rem;padding:.75rem 0;border-bottom:1px dashed #b9b0a5;align-items:baseline}
+.ligne dt{color:var(--pierre);font-size:.95rem}
+.ligne dd{margin:0;font-weight:700}
+.iban{font-family:var(--display);font-size:clamp(1.7rem,3.3vw,2.7rem);white-space:nowrap;letter-spacing:.03em;line-height:1.05;word-spacing:.12em;font-weight:400}
+.bordereau-bas{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:center;margin-top:1.4rem}
+.qr{width:8.5rem;height:8.5rem;padding:.4rem;border:2px solid var(--noir);border-radius:10px;background:#fff}
+.qr img{width:100%;height:100%;image-rendering:pixelated}
+.bordereau-bas p{font-size:1rem;margin:0 0 .9rem}
+.copie-etat{font-weight:700;color:var(--rouge-texte);min-height:1.5em;font-size:1rem;margin:.4rem 0 0}
+@media (max-width:520px){
+  .ligne{grid-template-columns:1fr}
+  .bordereau-bas{grid-template-columns:1fr}
+}
+
+/* Bénévolat */
+.benevolat{padding-block:clamp(3.5rem,8vw,6.5rem)}
+.benevolat-grille{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.benevolat h2{margin-bottom:1.2rem}
+.missions{list-style:none;margin:0 0 1.8rem;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.missions li{border:2px solid var(--noir);border-radius:999px;padding:.45rem 1rem;font-weight:700;font-size:1rem}
+@media (max-width:760px){.benevolat-grille{grid-template-columns:1fr}}
+
+/* Vidéos */
+.videos{background:var(--noir);color:var(--blanc);padding-block:clamp(3.5rem,8vw,6rem)}
+.videos-tete{display:flex;justify-content:space-between;align-items:end;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.videos-tete p{margin:0;color:#d8d2c8}
+.fleches{display:flex;gap:.6rem}
+.fleches button{width:3rem;height:3rem;border-radius:50%;border:2px solid var(--blanc);background:none;color:var(--blanc);font:700 1.3rem/1 var(--texte);cursor:pointer}
+.fleches button:hover{background:var(--blanc);color:var(--noir)}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,22rem);gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-color:var(--rouge) #333}
+.rail .video{scroll-snap-align:start;aspect-ratio:9/16;background:#1c1c1c;border-radius:12px;overflow:hidden}
+.rail iframe{width:100%;height:100%;border:0}
+
+/* Qui sommes-nous */
+.apropos{padding-block:clamp(3.5rem,8vw,6.5rem)}
+.apropos-grille{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem)}
+.apropos h2{margin-bottom:1.2rem}
+.fondateurs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-self:start}
+.fondateurs figure{margin:0;background:var(--sable);border-radius:12px;overflow:hidden}
+.fondateurs img{width:100%;aspect-ratio:330/374;object-fit:cover}
+.fondateurs figcaption{padding:.8rem 1rem 1rem}
+.fondateurs strong{display:block;font-family:var(--display);font-weight:400;font-size:1.8rem;line-height:1}
+.fondateurs span{color:var(--pierre);font-size:.95rem}
+@media (max-width:760px){.apropos-grille{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--sable);padding-block:clamp(3.5rem,8vw,6rem)}
+.contact h2{margin-bottom:2rem}
+.coord{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem;margin:0}
+.coord div{border-top:2px solid var(--noir);padding-top:1rem}
+.coord dt{color:var(--pierre);font-size:.95rem;margin-bottom:.3rem}
+.coord dd{margin:0;font-weight:700;font-size:1.2rem;line-height:1.45}
+.coord a{text-decoration-thickness:2px;text-underline-offset:.2em}
+.coord a:hover{color:var(--rouge-texte)}
+
+/* Pied */
+.pied{background:var(--noir);color:#d8d2c8;padding-block:3rem 2rem;font-size:1rem}
+.pied-grille{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;align-items:flex-start}
+.pied img{height:3rem;width:auto}
+.pied nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem}
+.pied a{color:var(--blanc);text-decoration:none}
+.pied a:hover{text-decoration:underline}
+.pied small{display:block;margin-top:2.5rem;color:#a39b91}
+</style>
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  <div class="cadre">
+    <a class="logo" href="#" aria-label="Cœur en Action, retour à l'accueil"><img src="assets/logo.svg" alt="Cœur en Action" width="150" height="50"></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="#actions">Nos actions</a>
+      <a href="#apropos">Qui sommes-nous</a>
+      <a href="#videos">Vidéos</a>
+      <a href="#benevolat">Bénévolat</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-don" href="#don">Faire un don</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+  <section class="cadre accueil" aria-labelledby="titre">
+    <div>
+      <h1 id="titre"><span>De l'aide,</span><span>du cœur,</span><span>de l'action.</span></h1>
+      <p class="intro">Cœur en Action est une association humanitaire bruxelloise. En Belgique et à l'international, nous apportons de l'eau potable, des repas, des écoles et des soins à celles et ceux qui en manquent.</p>
+      <div class="actions-accueil">
+        <a class="btn btn-don" href="#don">Faire un don</a>
+        <a class="btn" href="#benevolat">Devenir bénévole</a>
+      </div>
+    </div>
+    <figure>
+      <img src="assets/terrain-distribution.jpg" alt="Une bénévole de Cœur en Action distribue des colis alimentaires lors d'une mission en Afrique" width="637" height="1123">
+      <figcaption>Distribution lors d'une mission de l'association.</figcaption>
+    </figure>
+  </section>
+
+  <section class="mission" id="actions" aria-labelledby="titre-actions">
+    <div class="cadre">
+      <div class="mission-tete">
+        <h2 id="titre-actions">Nos actions</h2>
+        <p>Nous répondons aux besoins essentiels des plus démunis, avec les populations locales et en partenariat avec d'autres associations, en Belgique comme à l'étranger. Touchez un domaine pour en savoir plus.</p>
+      </div>
+      <ul class="domaines">
+        <li><details>
+          <summary><h3>Eau potable</h3><p class="resume">Forage de puits et distribution d'eau potable.</p><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="detail">
+            <p>L'eau est vitale, mais trop de populations en sont encore privées. Avec notre <strong>projet Eau</strong>, nous forons des puits et installons des systèmes de distribution pour garantir un accès durable à une eau propre.</p>
+            <p>C'est moins de maladies liées à l'eau, de meilleures conditions de vie et un avenir plus serein pour des villages entiers.</p>
+            <p class="devise">Chaque goutte compte, chaque action sauve des vies.</p>
+            <a class="btn btn-don" href="#don">Soutenir le projet Eau</a>
+          </div>
+        </details></li>
+        <li><details>
+          <summary><h3>Alimentation</h3><p class="resume">Repas chauds et colis alimentaires.</p><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="detail">
+            <p>Personne ne devrait souffrir de la faim. Nous distribuons des repas chauds et des colis alimentaires aux familles démunies, aux personnes sans abri et aux plus vulnérables.</p>
+            <p class="devise">Un repas, c'est plus qu'une assiette : c'est du réconfort, de la dignité et de l'espoir.</p>
+            <a class="btn btn-don" href="#don">Soutenir les colis alimentaires</a>
+          </div>
+        </details></li>
+        <li><details>
+          <summary><h3>Éducation</h3><p class="resume">Rénovation d'écoles et matériel scolaire.</p><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="detail">
+            <p>L'éducation est la clé d'un futur meilleur. Avec notre <strong>projet Scolarité</strong>, nous rénovons des écoles et fournissons du matériel scolaire aux enfants défavorisés.</p>
+            <p>Apprendre dans de bonnes conditions, avec un cartable et des fournitures, c'est une vraie chance d'échapper à la précarité.</p>
+            <p class="devise">Chaque enfant mérite d'apprendre et de rêver.</p>
+            <a class="btn btn-don" href="#don">Soutenir le projet Scolarité</a>
+          </div>
+        </details></li>
+        <li><details>
+          <summary><h3>Santé</h3><p class="resume">Cliniques et médicaments pour les plus vulnérables.</p><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="detail">
+            <p>L'accès aux soins est un droit fondamental. Avec notre <strong>projet Santé</strong>, nous construisons des cliniques et distribuons des médicaments là où les soins manquent.</p>
+            <p>De meilleures infrastructures et des traitements accessibles sauvent des vies et redonnent espoir.</p>
+            <p class="devise">La santé ne devrait jamais être un privilège.</p>
+            <a class="btn btn-don" href="#don">Soutenir le projet Santé</a>
+          </div>
+        </details></li>
+        <li><details>
+          <summary><h3>Sans-abris</h3><p class="resume">Nourriture, vêtements et écoute dans la rue.</p><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="detail">
+            <p>Vivre dans la rue, c'est affronter le froid, la faim et l'isolement. Nous apportons une aide concrète : <strong>distributions de nourriture et de vêtements, solutions d'hébergement temporaire</strong>.</p>
+            <p>Et au-delà des besoins essentiels, du réconfort et de l'écoute.</p>
+            <p class="devise">Personne ne devrait être laissé de côté.</p>
+            <a class="btn btn-don" href="#don">Soutenir l'aide aux sans-abris</a>
+          </div>
+        </details></li>
+      </ul>
+    </div>
+  </section>
+
+  <figure class="bande">
+    <img src="assets/benevoles-terrain.jpg" alt="Des bénévoles de Cœur en Action en gilet distribuent des colis, de la nourriture et des vivres à des familles" loading="lazy" width="1536" height="691">
+    <figcaption>Sur le terrain : colis, repas et vivres apportés en votre nom.</figcaption>
+  </figure>
+
+  <section class="don" id="don" aria-labelledby="titre-don">
+    <div class="cadre don-grille">
+      <div>
+        <h2 id="titre-don">Faites un don, changez des vies</h2>
+        <p>Votre don devient un repas, un accès à l'eau potable, des soins ou une place à l'école. Même un petit montant a un grand effet.</p>
+        <p>Le plus simple : scannez le code avec l'application de votre banque. Le bénéficiaire et le compte se remplissent tout seuls, il ne vous reste qu'à choisir le montant.</p>
+      </div>
+      <div class="bordereau">
+        <dl>
+          <div class="ligne"><dt>Bénéficiaire</dt><dd>Cœur en Action ASBL</dd></div>
+          <div class="ligne"><dt>Compte (IBAN)</dt><dd class="iban" id="iban">BE62 9502 3442 2861</dd></div>
+          <div class="ligne"><dt>Communication</dt><dd>Don Cœur en Action</dd></div>
+        </dl>
+        <div class="bordereau-bas">
+          <div class="qr"><img src="assets/qr-virement.svg" alt="Code QR de virement vers le compte BE62 9502 3442 2861 de Cœur en Action ASBL" width="140" height="140"></div>
+          <div>
+            <p>Sur ordinateur, copiez le numéro de compte et collez-le dans votre banque en ligne.</p>
+            <button class="btn" id="copier" type="button">Copier l'IBAN</button>
+            <p class="copie-etat" id="copie-etat" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cadre benevolat" id="benevolat" aria-labelledby="titre-benevolat">
+    <div class="benevolat-grille">
+      <h2 id="titre-benevolat">Rejoignez-nous, devenez bénévole</h2>
+      <div>
+        <p>Envie d'agir concrètement pour les plus démunis ? Rejoignez Cœur en Action et participez à nos missions solidaires. Chaque main tendue fait la différence.</p>
+        <ul class="missions" aria-label="Missions possibles">
+          <li>Distribution de repas</li>
+          <li>Soutien scolaire</li>
+          <li>Aide aux sans-abris</li>
+          <li>Projets humanitaires</li>
+        </ul>
+        <a class="btn btn-don" href="mailto:coeurenaction@hotmail.com?subject=Je%20souhaite%20devenir%20b%C3%A9n%C3%A9vole">Proposer mon aide par e-mail</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="videos" id="videos" aria-labelledby="titre-videos">
+    <div class="cadre">
+      <div class="videos-tete">
+        <div>
+          <h2 id="titre-videos">Nos actions en vidéo</h2>
+          <p>Nos campagnes, filmées sur le terrain.</p>
+        </div>
+        <div class="fleches">
+          <button type="button" data-dir="-1" aria-label="Vidéos précédentes">‹</button>
+          <button type="button" data-dir="1" aria-label="Vidéos suivantes">›</button>
+        </div>
+      </div>
+      <div class="rail" id="rail" tabindex="0" aria-label="Vidéos des campagnes, faites défiler horizontalement"></div>
+    </div>
+  </section>
+
+  <section class="cadre apropos" id="apropos" aria-labelledby="titre-apropos">
+    <div class="apropos-grille">
+      <div>
+        <h2 id="titre-apropos">Qui sommes-nous</h2>
+        <p>Cœur en Action est une ASBL basée à Bruxelles qui vient en aide aux populations fragilisées en Belgique et à l'international. Notre but : améliorer les conditions de vie des personnes en précarité et favoriser un développement durable et équitable.</p>
+        <p>Nous menons des programmes de développement avec les populations locales, selon une méthode participative. Nous organisons aussi des actions d'urgence pour les victimes de crises et soutenons les enfants en grande pauvreté.</p>
+        <p>Nous travaillons avec d'autres associations et institutions de bienfaisance, belges et internationales, qui partagent nos valeurs.</p>
+      </div>
+      <div class="fondateurs">
+        <figure><img src="assets/fondateur-1.png" alt="Portrait de Djamel, co-fondateur, en gilet de l'association" loading="lazy" width="330" height="374"><figcaption><strong>Djamel</strong><span>Co-fondateur</span></figcaption></figure>
+        <figure><img src="assets/fondateur-3.png" alt="Portrait de Driss, co-fondateur, souriant sur le terrain" loading="lazy" width="330" height="374"><figcaption><strong>Driss</strong><span>Co-fondateur</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="titre-contact">
+    <div class="cadre">
+      <h2 id="titre-contact">Contact</h2>
+      <dl class="coord">
+        <div><dt>Téléphone, 7 jours sur 7</dt><dd><a href="tel:+32477305441">+32 477 30 54 41</a><br><a href="tel:+32465909551">+32 465 90 95 51</a></dd></div>
+        <div><dt>E-mail</dt><dd><a href="mailto:coeurenaction@hotmail.com">coeurenaction@hotmail.com</a></dd></div>
+        <div><dt>Adresse</dt><dd>Rue Stroobants 62<br>1140 Bruxelles (Evere)</dd></div>
+        <div><dt>Réseaux sociaux</dt><dd><a href="https://www.facebook.com/coeurenactionasbl" rel="noopener">Facebook</a><br><a href="https://www.instagram.com/coeur_en_action_asbl" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@coeurenaction_asbl" rel="noopener">TikTok</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="cadre">
+    <div class="pied-grille">
+      <img src="assets/logo-clair.svg" alt="Cœur en Action" width="150" height="50" loading="lazy">
+      <nav aria-label="Liens du pied de page"><ul>
+        <li><a href="#actions">Nos actions</a></li>
+        <li><a href="#don">Faire un don</a></li>
+        <li><a href="#benevolat">Bénévolat</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul></nav>
+    </div>
+    <small>© <span id="annee">2026</span> Cœur en Action ASBL — Rue Stroobants 62, 1140 Bruxelles. Tous droits réservés.</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Menu mobile
+  var b=document.querySelector('.menu-btn'), n=document.getElementById('nav');
+  b.addEventListener('click',function(){var o=n.classList.toggle('ouvert');b.setAttribute('aria-expanded',o);b.textContent=o?'Fermer':'Menu';});
+  n.addEventListener('click',function(e){if(e.target.tagName==='A'&&n.classList.contains('ouvert')){n.classList.remove('ouvert');b.setAttribute('aria-expanded','false');b.textContent='Menu';}});
+
+  // Copier l'IBAN
+  var etat=document.getElementById('copie-etat');
+  document.getElementById('copier').addEventListener('click',function(){
+    var v='BE62950234422861';
+    function ok(){etat.textContent='IBAN copié : collez-le dans votre banque.';}
+    function ko(){etat.textContent='Copie impossible ici. Recopiez : BE62 9502 3442 2861';}
+    try{ if(navigator.clipboard){navigator.clipboard.writeText(v).then(ok,ko);} else {ko();} }catch(e){ko();}
+  });
+
+  // Vidéos Vimeo (chargées seulement à l'approche)
+  var ids=['1061862979?h=6a91ef5f69','1061991233','1061991452','1061991667','1061991866','1061992091','1061992283','1061992493','1061992682'];
+  var rail=document.getElementById('rail');
+  ids.forEach(function(id,i){
+    var d=document.createElement('div'); d.className='video';
+    var f=document.createElement('iframe');
+    f.src='https://player.vimeo.com/video/'+id+(id.indexOf('?')>-1?'&':'?')+'dnt=1&title=0&byline=0&portrait=0';
+    f.loading='lazy'; f.title='Campagne Cœur en Action, vidéo '+(i+1)+' sur '+ids.length;
+    f.allow='fullscreen; picture-in-picture'; f.setAttribute('allowfullscreen','');
+    d.appendChild(f); rail.appendChild(d);
+  });
+  document.querySelectorAll('.fleches button').forEach(function(btn){
+    btn.addEventListener('click',function(){rail.scrollBy({left:+btn.dataset.dir*rail.clientWidth*.85,behavior:'smooth'});});
+  });
+
+  document.getElementById('annee').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
