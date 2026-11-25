@@ -1,0 +1,20 @@
+# Cœur en Action ASBL
+
+> Association humanitaire bruxelloise (ASBL) : eau potable, colis alimentaires, écoles, soins et aide aux sans-abris, en Belgique et à l'international. Dons en ligne (Bancontact, Wero, carte, virement), zakat, sadaqa et sadaqa jariya.
+
+## Pages principales
+
+- [Nos projets](https://whiteshade15.github.io/coeurenaction/v2/projets.html): tous les projets et l'avancement des collectes
+- [Faire un don](https://whiteshade15.github.io/coeurenaction/v2/don.html): don unique ou mensuel, zakat, sadaqa, sadaqa jariya
+- [Calculateur de zakat](https://whiteshade15.github.io/coeurenaction/v2/zakat.html): calcul de la zakat al-maal (nisab, 2,5 %) et zakat al-fitr
+- [Qui sommes-nous](https://whiteshade15.github.io/coeurenaction/v2/a-propos.html): fondateurs, transparence, questions fréquentes
+- [Contact](https://whiteshade15.github.io/coeurenaction/v2/contact.html): téléphone, e-mail, adresse, bénévolat
+
+## Projets
+
+- [Forer des puits d'eau potable](https://whiteshade15.github.io/coeurenaction/v2/projet-puits.html): Un puits donne de l'eau propre à tout un village, pour des années.
+- [Colis alimentaires pour les familles](https://whiteshade15.github.io/coeurenaction/v2/projet-colis.html): Des colis de base pour nourrir une famille pendant plusieurs semaines.
+- [Rénover une école et l'équiper](https://whiteshade15.github.io/coeurenaction/v2/projet-ecole.html): Des classes rénovées, des cartables et des fournitures pour chaque élève.
+- [Soins et médicaments pour les plus vulnérables](https://whiteshade15.github.io/coeurenaction/v2/projet-sante.html): Des médicaments et des soins là où il n'y a ni pharmacie ni médecin.
+- [Maraudes auprès des sans-abris à Bruxelles](https://whiteshade15.github.io/coeurenaction/v2/projet-sans-abris.html): Repas chauds, vêtements et écoute dans les rues de Bruxelles.
+- [Là où le besoin est le plus grand](https://whiteshade15.github.io/coeurenaction/v2/projet-general.html): Vous nous laissez choisir le projet le plus urgent du moment.

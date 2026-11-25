@@ -1,0 +1,6 @@
+# Version de démonstration : les pages portent une balise noindex tant que DEMO = true
+# Moteurs de recherche et assistants IA (ChatGPT, Perplexity, Claude, Google, Bing) : bienvenus
+User-agent: *
+Allow: /
+
+Sitemap: https://whiteshade15.github.io/coeurenaction/v2/sitemap.xml

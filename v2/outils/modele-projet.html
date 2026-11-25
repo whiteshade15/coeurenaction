@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITRE_PAGE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#F3162D">
+{{TETE}}
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="projets" data-projet="{{ID}}">
+<a class="saut" href="#contenu">Aller au contenu</a>
+{{ENTETE}}
+
+<main id="contenu" class="cadre">
+  <nav class="fil" aria-label="Fil d'Ariane"><a href="projets.html">Nos projets</a> › <span aria-current="page">{{TITRE}}</span></nav>
+  <div class="projet-page">
+    <article>
+      <span class="lieu">{{LIEU}}</span>
+      <h1 style="font-size:clamp(2.6rem,6.5vw,5rem);margin-top:.4rem">{{TITRE}}</h1>
+      <div class="visuel-grand">{{VISUEL}}</div>
+      <div style="font-size:1.15rem">{{TEXTE}}</div>
+      <h2 style="font-size:2.2rem;margin:2rem 0 1rem">Ce que permet votre don</h2>
+      <ul class="impacts">{{IMPACTS}}</ul>
+      <p class="discret" style="font-size:1rem">Photos et vidéos de la réalisation seront publiées ici dès que le projet est terminé. Les donateurs les reçoivent par e-mail. Mis à jour le {{MAJ}}.</p>
+      <p><button class="btn" type="button" id="partager">Partager ce projet</button> <span id="partage-etat" role="status" class="discret"></span></p>
+    </article>
+    <aside class="colonne-don" aria-labelledby="titre-soutien">
+      <div style="margin-bottom:1.2rem">{{JAUGE}}</div>
+      <form class="don-rapide" id="don-rapide" action="don.html" novalidate>
+        <h2 id="titre-soutien">Soutenir ce projet</h2>
+        <input type="hidden" name="projet" value="{{ID}}">
+        <div class="bascule" role="radiogroup" aria-label="Fréquence du don">
+          <label><input type="radio" name="frequence" value="unique" checked>Une fois</label>
+          <label><input type="radio" name="frequence" value="mensuel">Chaque mois</label>
+        </div>
+        <div class="montants" role="radiogroup" aria-label="Montant">{{MONTANTS}}</div>
+        <label class="champ montant-libre"><span class="sr">Autre montant</span><input type="number" name="libre" min="1" step="1" inputmode="numeric" placeholder="Autre montant"></label>
+        <p class="impact-ligne" aria-live="polite"></p>
+        <button class="btn btn-don btn-plein" type="submit">Continuer</button>
+      </form>
+    </aside>
+  </div>
+</main>
+
+{{PIED}}
+<script src="js/data.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var p=projetParId(document.body.dataset.projet);
+  animerJauges();
+  initDonRapide(document.getElementById("don-rapide"),p.id);
+  document.getElementById("partager").addEventListener("click",function(){
+    var s=document.getElementById("partage-etat");
+    if(navigator.share){navigator.share({title:p.titre,text:p.resume,url:location.href}).catch(function(){});}
+    else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(function(){s.textContent="Lien copié.";});}
+  });
+})();
+</script>
+</body>
+</html>
