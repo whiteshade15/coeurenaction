@@ -119,9 +119,14 @@
     var don={type:val("type"),projet:sel.value,frequence:val("frequence"),montant:montant(),moyen:val("moyen"),
       prenom:$("[name=prenom]").value.trim(),nom:$("[name=nom]").value.trim(),email:$("[name=email]").value.trim(),
       dedicace:$("[name=dedicace]").value.trim(),attestation:C.agrementFiscal&&$("#attestation").checked,news:$("[name=news]").checked,anonyme:$("[name=anonyme]").checked};
-    /* EN PRODUCTION :
-    fetch("/api/creer-paiement",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(don)})
-      .then(function(r){return r.json();}).then(function(d){location.href=d.checkoutUrl;}); return; */
+    if(C.paiementEnLigne){
+      var btn=$("#payer"), err=$("#err3"); btn.disabled=true; btn.textContent="Redirection vers le paiement…"; err.textContent="";
+      fetch("/api/creer-paiement",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(don)})
+        .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+        .then(function(x){ if(x.ok&&x.j.checkoutUrl&&/^https:\/\/[a-z0-9.-]*mollie\.com\//.test(x.j.checkoutUrl)){location.href=x.j.checkoutUrl;} else {throw new Error(x.j.erreur||"");} })
+        .catch(function(e){ btn.disabled=false; btn.textContent="Donner"; err.textContent=(e&&e.message)||"Le paiement n'a pas pu démarrer. Réessayez ou faites un virement."; });
+      return;
+    }
     // DÉMO
     $("#merci-prenom").textContent=don.prenom;
     $("#merci-texte").textContent="Nous avons bien reçu votre "+TYPES[don.type].toLowerCase()+" de "+eur(don.montant,don.montant%1?2:0)+(don.frequence==="mensuel"?" par mois":"")+" pour « "+(don.type==="zakat-fitr"?"la distribution de l'Aïd":projetParId(don.projet).titre)+" »"+(don.dedicace?", au nom de "+don.dedicace:"")+". Un reçu vous sera envoyé à "+don.email+".";

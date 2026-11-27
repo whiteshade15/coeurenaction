@@ -103,11 +103,12 @@ PAGES = {"index.html": "accueil", "projets.html": "projets", "don.html": "don", 
          "a-propos.html": "apropos", "contact.html": "contact"}
 site_ld = {"@type": "WebSite", "@id": BASE + "#site", "name": C["nom"], "url": BASE, "inLanguage": "fr-BE", "publisher": {"@id": BASE + "#asbl"}}
 
-doc = (R / "404.html").read_text(encoding="utf-8")
-doc = re.sub(r'<base href="[^"]*">', f'<base href="{BASE}">', doc)
-doc = re.sub(r'<header id="entete".*?</header>', lambda m: entete(""), doc, count=1, flags=re.S)
-doc = re.sub(r'<footer id="pied".*?</footer>', lambda m: pied(), doc, count=1, flags=re.S)
-(R / "404.html").write_text(doc, encoding="utf-8")
+for f in ("404.html", "merci.html"):
+    doc = (R / f).read_text(encoding="utf-8")
+    doc = re.sub(r'<base href="[^"]*">', f'<base href="{BASE}">', doc)
+    doc = re.sub(r'<header id="entete".*?</header>', lambda m: entete(""), doc, count=1, flags=re.S)
+    doc = re.sub(r'<footer id="pied".*?</footer>', lambda m: pied(), doc, count=1, flags=re.S)
+    (R / f).write_text(doc, encoding="utf-8")
 
 for f, page in PAGES.items():
     doc = (R / f).read_text(encoding="utf-8")
@@ -184,4 +185,23 @@ urls = [""] + [f for f in PAGES if f != "index.html"] + [f'projet-{p["id"]}.html
                                 ("a-propos.html", "Qui sommes-nous", "fondateurs, transparence, questions fréquentes"),
                                 ("contact.html", "Contact", "téléphone, e-mail, adresse, bénévolat")])
                             + "\n## Projets\n\n" + "".join(f"- [{p['titre']}]({BASE}projet-{p['id']}.html): {p['resume']}\n" for p in P), encoding="utf-8")
+# ---------- en-têtes de sécurité (appliqués par Vercel) ----------
+import hashlib, base64
+hashes = set()
+for page in R.glob("*.html"):
+    for m in re.finditer(r"<script(?![^>]*\bsrc=)(?![^>]*application/ld\+json)[^>]*>(.*?)</script>", page.read_text(encoding="utf-8"), re.S):
+        hashes.add("'sha256-" + base64.b64encode(hashlib.sha256(m.group(1).encode("utf-8")).digest()).decode() + "'")
+csp = ("default-src 'self'; script-src 'self' " + " ".join(sorted(hashes)) + "; style-src 'self' 'unsafe-inline'; "
+       "img-src 'self' data:; font-src 'self'; frame-src https://player.vimeo.com; connect-src 'self'; "
+       "form-action 'self' mailto:; base-uri 'self' " + BASE.split('/')[0] + '//' + BASE.split('/')[2] + "; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests")
+entetes = [{"key": "Content-Security-Policy", "value": csp},
+           {"key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload"},
+           {"key": "X-Content-Type-Options", "value": "nosniff"},
+           {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
+           {"key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()"},
+           {"key": "X-Frame-Options", "value": "DENY"}]
+(R / "vercel.json").write_text(json.dumps({"cleanUrls": False, "headers": [
+    {"source": "/(.*)", "headers": entetes},
+    {"source": "/api/(.*)", "headers": [{"key": "Cache-Control", "value": "no-store"}]}]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
 print("Construit :", len(PAGES), "pages,", len(P), "pages projet, sitemap", len(urls), "URL, DEMO =", C["DEMO"])

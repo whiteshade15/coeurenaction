@@ -79,7 +79,8 @@ window.CEA = {
    }
   ],
   "baseUrl": "https://whiteshade15.github.io/coeurenaction/v2/",
-  "majLe": "2026-11-25"
+  "majLe": "2026-11-25",
+  "paiementEnLigne": false
  },
  "projets": [
   {

@@ -1,0 +1,8 @@
+{
+  "name": "coeurenaction-site",
+  "private": true,
+  "description": "Site de Cœur en Action ASBL — pages statiques + fonctions de paiement Mollie (Vercel)",
+  "engines": { "node": ">=20" },
+  "scripts": { "build": "python3 outils/build.py" },
+  "dependencies": { "@mollie/api-client": "4.7.0" }
+}
