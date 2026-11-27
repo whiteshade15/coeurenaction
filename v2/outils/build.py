@@ -125,6 +125,14 @@ for f, page in PAGES.items():
     if f == "index.html":
         cartes = "".join(carte(next(p for p in P if p["id"] == i)) for i in ["colis", "sans-abris", "puits"])
         doc = re.sub(r'(<div class="grille-projets" id="projets-accueil">).*?(</div>\s*<p style="margin-top:2rem">)', lambda m: m.group(1) + cartes + m.group(2), doc, flags=re.S)
+    if f == "index.html":
+        rail = "".join(
+            f'<button type="button" class="video" data-video="{v["id"]}" aria-label="Lire la vidéo {k+1} sur {len(C["videos"])} : action au {v["pays"]}, {v["duree"]//60} min {v["duree"]%60:02d} s">'
+            f'<img src="{v["apercu"]}" alt="" loading="lazy" width="300" height="533">'
+            f'<span class="video-play" aria-hidden="true"></span>'
+            f'<span class="video-legende">{e(v["pays"])} · {v["duree"]//60}:{v["duree"]%60:02d}</span></button>'
+            for k, v in enumerate(C["videos"]))
+        doc = re.sub(r'(<div class="rail" id="rail"[^>]*>).*?(</div>)', lambda m: m.group(1) + rail + m.group(2), doc, count=1, flags=re.S)
     if f == "projets.html":
         doc = re.sub(r'(<div class="grille-projets" id="liste" aria-live="polite">).*?(</div>\s*</main>)', lambda m: m.group(1) + "".join(carte(p, "h2") for p in P) + m.group(2), doc, flags=re.S)
     (R / f).write_text(doc, encoding="utf-8")

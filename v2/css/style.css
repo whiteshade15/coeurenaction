@@ -168,6 +168,14 @@ textarea{min-height:8rem;resize:vertical}
 .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,20rem);gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-color:var(--rouge) #333}
 .rail .video{scroll-snap-align:start;aspect-ratio:9/16;background:#1c1c1c;border-radius:12px;overflow:hidden}
 .rail iframe{width:100%;height:100%;border:0}
+.rail button.video{position:relative;padding:0;border:0;cursor:pointer;display:block;width:100%;color:var(--blanc);font:inherit}
+.rail button.video img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.rail button.video:hover img{transform:scale(1.03)}
+.rail button.video::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 40%)}
+.video-play{position:absolute;z-index:1;left:50%;top:50%;width:4.2rem;height:4.2rem;margin:-2.1rem 0 0 -2.1rem;border-radius:50%;background:var(--rouge-action);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.video-play::before{content:"";position:absolute;left:1.65rem;top:1.25rem;border-style:solid;border-width:.85rem 0 .85rem 1.35rem;border-color:transparent transparent transparent #fff}
+.video-legende{position:absolute;z-index:1;left:1rem;bottom:.9rem;font-family:var(--display);font-size:1.15rem;letter-spacing:.03em}
+.rail button.video:focus-visible{outline:3px solid var(--blanc);outline-offset:3px}
 .fleches{display:flex;gap:.6rem}
 .fleches button{width:3rem;height:3rem;border-radius:50%;border:2px solid var(--blanc);background:none;color:var(--blanc);font:700 1.3rem/1 var(--texte);cursor:pointer}
 .fleches button:hover{background:var(--blanc);color:var(--noir)}

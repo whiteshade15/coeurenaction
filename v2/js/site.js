@@ -72,19 +72,20 @@
     maj();
   };
 
-  /* Vidéos */
+  /* Vidéos : aperçu léger, le lecteur Vimeo ne se charge qu'au clic */
   window.initVideos = function(rail){
     if(!rail) return;
-    C.videos.forEach(function(id,i){
-      var d=document.createElement("div"); d.className="video";
-      var f=document.createElement("iframe");
-      f.src="https://player.vimeo.com/video/"+id+(id.indexOf("?")>-1?"&":"?")+"dnt=1&title=0&byline=0&portrait=0";
-      f.loading="lazy"; f.title="Campagne Cœur en Action, vidéo "+(i+1)+" sur "+C.videos.length;
-      f.allow="fullscreen; picture-in-picture"; f.setAttribute("allowfullscreen","");
-      d.appendChild(f); rail.appendChild(d);
+    rail.addEventListener("click",function(ev){
+      var btn=ev.target.closest(".video[data-video]"); if(!btn) return;
+      var id=btn.dataset.video, f=document.createElement("iframe");
+      f.src="https://player.vimeo.com/video/"+id+(id.indexOf("?")>-1?"&":"?")+"autoplay=1&dnt=1&title=0&byline=0&portrait=0";
+      f.title=btn.getAttribute("aria-label").replace("Lire la vidéo","Vidéo");
+      f.allow="autoplay; fullscreen; picture-in-picture"; f.setAttribute("allowfullscreen","");
+      var box=document.createElement("div"); box.className="video lecture"; box.appendChild(f);
+      btn.replaceWith(box); f.focus();
     });
-    document.querySelectorAll("[data-rail]").forEach(function(btn){
-      btn.addEventListener("click",function(){rail.scrollBy({left:+btn.dataset.rail*rail.clientWidth*.85,behavior:"smooth"});});
+    document.querySelectorAll("[data-rail]").forEach(function(b){
+      b.addEventListener("click",function(){rail.scrollBy({left:+b.dataset.rail*rail.clientWidth*.85,behavior:"smooth"});});
     });
   };
 })();

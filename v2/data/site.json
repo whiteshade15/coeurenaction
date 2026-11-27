@@ -22,15 +22,60 @@
       "tiktok": "https://www.tiktok.com/@coeurenaction_asbl"
     },
     "videos": [
-      "1061862979?h=6a91ef5f69",
-      "1061991233",
-      "1061991452",
-      "1061991667",
-      "1061991866",
-      "1061992091",
-      "1061992283",
-      "1061992493",
-      "1061992682"
+      {
+        "id": "1061862979?h=6a91ef5f69",
+        "pays": "Maroc",
+        "duree": 65,
+        "apercu": "assets/videos/apercu-1.jpg"
+      },
+      {
+        "id": "1061991233",
+        "pays": "Maroc",
+        "duree": 56,
+        "apercu": "assets/videos/apercu-2.jpg"
+      },
+      {
+        "id": "1061991452",
+        "pays": "Maroc",
+        "duree": 56,
+        "apercu": "assets/videos/apercu-3.jpg"
+      },
+      {
+        "id": "1061991667",
+        "pays": "Maroc",
+        "duree": 35,
+        "apercu": "assets/videos/apercu-4.jpg"
+      },
+      {
+        "id": "1061991866",
+        "pays": "Maroc",
+        "duree": 66,
+        "apercu": "assets/videos/apercu-5.jpg"
+      },
+      {
+        "id": "1061992091",
+        "pays": "Togo",
+        "duree": 55,
+        "apercu": "assets/videos/apercu-6.jpg"
+      },
+      {
+        "id": "1061992283",
+        "pays": "Togo",
+        "duree": 55,
+        "apercu": "assets/videos/apercu-7.jpg"
+      },
+      {
+        "id": "1061992493",
+        "pays": "Togo",
+        "duree": 57,
+        "apercu": "assets/videos/apercu-8.jpg"
+      },
+      {
+        "id": "1061992682",
+        "pays": "Bénin",
+        "duree": 57,
+        "apercu": "assets/videos/apercu-9.jpg"
+      }
     ],
     "baseUrl": "https://whiteshade15.github.io/coeurenaction/v2/",
     "majLe": "2026-11-25"
