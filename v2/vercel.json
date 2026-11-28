@@ -6,7 +6,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-AgL3L3FRnpLEiOOWwqDjDMJCZcsz2OgB14X5moR9A60=' 'sha256-N0S/oRDGHmXkA7UlGFpPQtt6KRgibXkWSHZ6g//juBU=' 'sha256-SuztXX7MIQ0Pv4ynVKTYrQxv1TkQ/bhyaID0h1tMI1Y=' 'sha256-XJ9PAXWLpIeE9pFxz4D7/ZAQJMcquo3uXsDAMpsnaeU=' 'sha256-drvM3J6IYEbwO+STTICn9BJHqms/h6nMmpwLe47+TDI=' 'sha256-q+6VtgbHP9AJ1gAC22zAPl3OP8dzz0TznwNg+IGkinA='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://player.vimeo.com; connect-src 'self'; form-action 'self' mailto:; base-uri 'self' https://whiteshade15.github.io; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-AgL3L3FRnpLEiOOWwqDjDMJCZcsz2OgB14X5moR9A60=' 'sha256-N0S/oRDGHmXkA7UlGFpPQtt6KRgibXkWSHZ6g//juBU=' 'sha256-SuztXX7MIQ0Pv4ynVKTYrQxv1TkQ/bhyaID0h1tMI1Y=' 'sha256-XJ9PAXWLpIeE9pFxz4D7/ZAQJMcquo3uXsDAMpsnaeU=' 'sha256-drvM3J6IYEbwO+STTICn9BJHqms/h6nMmpwLe47+TDI=' 'sha256-q+6VtgbHP9AJ1gAC22zAPl3OP8dzz0TznwNg+IGkinA=' 'sha256-x3ilCZKJi2gaU6Dna4cySPiaZ0U7Vakin1ytp/JGL00='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://player.vimeo.com; connect-src 'self'; form-action 'self' mailto:; base-uri 'self' https://whiteshade15.github.io; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         {
           "key": "Strict-Transport-Security",

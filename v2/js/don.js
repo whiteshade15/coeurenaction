@@ -3,7 +3,7 @@
 (function(){
   var C=CEA.config, f=document.getElementById("form-don"), q=new URLSearchParams(location.search);
   var $=function(s){return document.querySelector(s);}, val=function(n){var e=f.querySelector("[name="+n+"]:checked")||f.querySelector("[name="+n+"]");return e?e.value:"";};
-  var TYPES={"sadaqa":"Sadaqa","zakat":"Zakat al-maal","sadaqa-jariya":"Sadaqa jariya","zakat-fitr":"Zakat al-fitr"};
+  var TYPES={"sadaqa":"Sadaqa","zakat":"Zakat al-maal","sadaqa-jariya":"Sadaqa jariya","parrainage":"Parrainage d'orphelin","zakat-fitr":"Zakat al-fitr"};
   var MOYENS=[
     {id:"bancontact",t:"Bancontact",s:"Avec votre carte ou l'app de votre banque.",mensuel:true},
     {id:"bancontact-pay",t:"Bancontact Pay",s:"Scannez un QR code avec l'app Bancontact Pay ou votre app bancaire.",mensuel:false},
@@ -20,8 +20,9 @@
   if(q.get("type")&&TYPES[q.get("type")]) f.querySelector('[name=type][value="'+q.get("type")+'"]').checked=true;
   if(q.get("projet")&&projetParId(q.get("projet"))) sel.value=q.get("projet");
   else if(q.get("type")==="sadaqa-jariya") sel.value="puits";
+  if(q.get("type")==="parrainage"){ sel.value="orphelins"; f.querySelector('[name=frequence][value=mensuel]').checked=true; }
   if(q.get("frequence")==="mensuel") f.querySelector('[name=frequence][value=mensuel]').checked=true;
-  var montantInitial=+q.get("montant")||0;
+  var montantInitial=+q.get("montant")||(q.get("type")==="parrainage"&&C.parrainageMensuel)||0;
 
   function montant(){
     if(val("type")==="zakat-fitr"){ return C.zakatAlFitrParPersonne ? C.zakatAlFitrParPersonne*Math.max(1,+val("personnes")||1) : (+$("[name=libre]").value||0); }
@@ -106,6 +107,7 @@
   f.addEventListener("input",function(e){
     if(e.target.name==="montant") $("[name=libre]").value="";
     if(e.target.name==="libre"&&e.target.value) f.querySelectorAll("[name=montant]").forEach(function(r){r.checked=false;});
+    if(e.target.name==="type"&&e.target.value==="parrainage"){ sel.value="orphelins"; f.querySelector('[name=frequence][value=mensuel]').checked=true; dessinerMontants(); }
     if(e.target.name==="projet") dessinerMontants();
     if(e.target.id==="attestation") $("#champs-fiscal").hidden=!e.target.checked;
     maj();

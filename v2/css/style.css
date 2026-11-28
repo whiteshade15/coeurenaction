@@ -287,3 +287,9 @@ legend{font-family:var(--display);font-size:clamp(1.7rem,3vw,2.2rem);margin-bott
 /* Montants en chiffres sans zéro barré (la police de texte barre le 0) */
 .montants label,.chiffres strong,.impacts strong,.recap .total dd,.resultat .grand,.iban{font-family:var(--display);font-weight:400;letter-spacing:.02em}
 .montants label{font-size:1.2rem}
+
+/* Parrainage */
+.ar-titre{display:block;font-family:"Amiri","Noto Naskh Arabic","Geeza Pro","Arabic Typesetting",serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--rouge-texte);margin-bottom:.4rem;line-height:1.3}
+.hadith{margin:0;align-self:center;background:var(--sable);border-left:6px solid var(--rouge-action);border-radius:0 var(--rayon) var(--rayon) 0;padding:clamp(1.4rem,3vw,2.2rem)}
+.hadith p{font-size:clamp(1.25rem,2.2vw,1.6rem);line-height:1.45;margin-bottom:1rem}
+.hadith footer{color:var(--pierre);font-size:.95rem}

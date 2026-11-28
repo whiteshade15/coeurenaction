@@ -15,7 +15,7 @@ const mollie = createMollieClient({ apiKey: process.env.MOLLIE_API_KEY });
 const BASE = (process.env.SITE_URL || SITE.config.baseUrl).replace(/\/+$/, "");
 
 const PROJETS = new Map(SITE.projets.map(p => [p.id, p]));
-const TYPES = { sadaqa: "Sadaqa", zakat: "Zakat", "sadaqa-jariya": "Sadaqa jariya", "zakat-fitr": "Zakat al-fitr" };
+const TYPES = { sadaqa: "Sadaqa", zakat: "Zakat", "sadaqa-jariya": "Sadaqa jariya", parrainage: "Parrainage d'orphelin", "zakat-fitr": "Zakat al-fitr" };
 // Wero n'est pas encore dans le client Mollie 4.7 : on laisse Mollie proposer ses moyens (method non forcé).
 const METHODES = { bancontact: "bancontact", "bancontact-pay": "bancontact", creditcard: "creditcard", banktransfer: "banktransfer", wero: undefined };
 const RECURRENTS = new Set(["bancontact", "creditcard"]);
@@ -43,6 +43,7 @@ module.exports = async (req, res) => {
   if (!TYPES[type]) return erreur(res, 400, "Type de don inconnu.");
   if (!projet) return erreur(res, 400, "Projet inconnu.");
   if (type === "zakat" && !projet.zakat) return erreur(res, 400, "Ce projet n'est pas éligible à la zakat.");
+  if (type === "parrainage" && projet.id !== "orphelins") return erreur(res, 400, "Le parrainage concerne le projet Orphelins.");
   if (!Object.prototype.hasOwnProperty.call(METHODES, moyen)) return erreur(res, 400, "Moyen de paiement inconnu.");
   const montant = Math.round(Number(d.montant) * 100) / 100;
   if (!Number.isFinite(montant) || montant < MIN || montant > MAX) return erreur(res, 400, `Montant entre ${MIN} € et ${MAX} €.`);

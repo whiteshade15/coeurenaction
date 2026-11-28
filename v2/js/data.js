@@ -81,7 +81,8 @@ window.CEA = {
   "baseUrl": "https://whiteshade15.github.io/coeurenaction/v2/",
   "majLe": "2026-11-25",
   "paiementEnLigne": false,
-  "creeLe": "2025-01-20"
+  "creeLe": "2025-01-20",
+  "parrainageMensuel": null
  },
  "projets": [
   {
@@ -247,6 +248,39 @@ window.CEA = {
     [
      100,
      "une maraude complète"
+    ]
+   ]
+  },
+  {
+   "id": "orphelins",
+   "domaine": "Orphelins",
+   "titre": "Parrainer un orphelin",
+   "lieu": "À préciser",
+   "couleur": "#7A1F3D",
+   "image": null,
+   "resume": "Un don mensuel pour la nourriture, la scolarité et les soins d'un enfant orphelin.",
+   "texte": [
+    "Un orphelin parrainé, c'est un enfant qui mange à sa faim, qui va à l'école et qui est soigné quand il tombe malade.",
+    "Votre don mensuel lui assure cette stabilité, mois après mois. Vous pouvez l'arrêter à tout moment."
+   ],
+   "objectif": null,
+   "collecte": null,
+   "donateurs": null,
+   "jariya": false,
+   "zakat": false,
+   "urgence": false,
+   "impacts": [
+    [
+     25,
+     "participe aux besoins d'un enfant pendant un mois"
+    ],
+    [
+     50,
+     "couvre une grande partie de ses besoins du mois"
+    ],
+    [
+     100,
+     "soutient deux enfants pendant un mois"
     ]
    ]
   },

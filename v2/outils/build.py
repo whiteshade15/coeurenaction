@@ -23,7 +23,7 @@ def eur(n):
     return f"{n:,.0f}".replace(",", " ") + " €"
 
 # ---------- blocs communs ----------
-LIENS = [("projets.html", "Nos projets", "projets"), ("zakat.html", "Zakat", "zakat"),
+LIENS = [("projets.html", "Nos projets", "projets"), ("parrainage.html", "Parrainage", "parrainage"), ("zakat.html", "Zakat", "zakat"),
          ("a-propos.html", "Qui sommes-nous", "apropos"), ("a-propos.html#transparence", "Transparence", "transparence"),
          ("contact.html", "Contact", "contact")]
 
@@ -42,13 +42,16 @@ def pied():
             '<div><img src="assets/logo-clair.svg" alt="Cœur en Action" width="150" height="50" loading="lazy">'
             "<p>Association humanitaire bruxelloise. De l'aide, du cœur, de l'action, en Belgique et à l'international.</p></div>"
             '<div><h2>Donner</h2><ul><li><a href="don.html">Faire un don</a></li><li><a href="don.html?frequence=mensuel">Don mensuel</a></li>'
-            '<li><a href="zakat.html">Calculateur de zakat</a></li><li><a href="don.html?type=sadaqa-jariya">Sadaqa jariya</a></li></ul></div>'
+            '<li><a href="parrainage.html">Parrainer un orphelin</a></li><li><a href="zakat.html">Calculateur de zakat</a></li><li><a href="don.html?type=sadaqa-jariya">Sadaqa jariya</a></li></ul></div>'
             "<div><h2>L'association</h2><ul><li><a href=\"projets.html\">Nos projets</a></li><li><a href=\"a-propos.html\">Qui sommes-nous</a></li>"
             '<li><a href="a-propos.html#transparence">Transparence</a></li><li><a href="contact.html#benevolat">Devenir bénévole</a></li></ul></div>'
             f'<div><h2>Nous suivre</h2><ul><li><a href="{r["facebook"]}" rel="noopener">Facebook</a></li><li><a href="{r["instagram"]}" rel="noopener">Instagram</a></li>'
             f'<li><a href="{r["tiktok"]}" rel="noopener">TikTok</a></li><li><a href="mailto:{C["email"]}">{C["email"]}</a></li></ul></div>'
             f'</div><small>© {datetime.date.today().year} {e(C["nom"])}{" — BCE " + C["bce"] if C.get("bce") else ""} — {e(C["adresse"])}. '
             f'IBAN {C["iban"]}. Tous droits réservés. · <a href="a-propos.html#confidentialite">Vie privée</a></small></div></footer>')
+
+PAGE_DEDIEE = {"orphelins": "parrainage.html"}
+lien_projet = lambda p: PAGE_DEDIEE.get(p["id"], f'projet-{p["id"]}.html')
 
 def carte(p, titre="h3"):
     pct = min(100, round(p["collecte"] / p["objectif"] * 100)) if p.get("objectif") else None
@@ -62,9 +65,9 @@ def carte(p, titre="h3"):
     return (f'<article class="projet" data-domaine="{e(p["domaine"])}" data-urgence="{str(p["urgence"]).lower()}" data-jariya="{str(p["jariya"]).lower()}">'
             f'<div class="projet-visuel">{vis}<div class="etiquettes">{et}</div></div>'
             f'<div class="projet-corps"><span class="lieu">{e(p["lieu"])}</span>'
-            f'<{titre}><a href="projet-{p["id"]}.html">{e(p["titre"])}</a></{titre}><p>{e(p["resume"])}</p>{jauge}'
+            f'<{titre}><a href="{lien_projet(p)}">{e(p["titre"])}</a></{titre}><p>{e(p["resume"])}</p>{jauge}'
             f'<div class="projet-actions"><a class="btn btn-don" href="don.html?projet={p["id"]}">Donner</a>'
-            f'<a class="btn" href="projet-{p["id"]}.html">Voir le projet</a></div></div></article>')
+            f'<a class="btn" href="{lien_projet(p)}">Voir le projet</a></div></div></article>')
 
 def org():
     o = {"@type": "NGO", "@id": BASE + "#asbl", "name": C["nom"], "url": BASE, "logo": BASE + "assets/logo.svg",
@@ -100,7 +103,7 @@ def remplacer(doc, debut, fin, contenu):
     return re.sub(re.escape(debut) + ".*?" + re.escape(fin), lambda m: contenu, doc, flags=re.S)
 
 # ---------- pages existantes ----------
-PAGES = {"index.html": "accueil", "projets.html": "projets", "don.html": "don", "zakat.html": "zakat",
+PAGES = {"index.html": "accueil", "projets.html": "projets", "parrainage.html": "parrainage", "don.html": "don", "zakat.html": "zakat",
          "a-propos.html": "apropos", "contact.html": "contact"}
 site_ld = {"@type": "WebSite", "@id": BASE + "#site", "name": C["nom"], "url": BASE, "inLanguage": "fr-BE", "publisher": {"@id": BASE + "#asbl"}}
 
@@ -119,7 +122,7 @@ for f, page in PAGES.items():
     titre = re.search(r"<title>(.*?)</title>", doc).group(1)
     desc = html.unescape(re.search(r'<meta name="description" content="(.*?)">', doc).group(1))
     schemas = [org(), site_ld] if f == "index.html" else [{"@id": BASE + "#asbl", "@type": "NGO", "name": C["nom"]}]
-    if f in ("a-propos.html", "zakat.html"): schemas.append(faq_schema(doc))
+    if f in ("a-propos.html", "zakat.html", "parrainage.html"): schemas.append(faq_schema(doc))
     bloc = tete(f, titre, desc, schemas=schemas)
     doc = remplacer(doc, "<!--TETE-->", "<!--/TETE-->", bloc) if "<!--TETE-->" in doc else doc.replace('<link rel="stylesheet"', bloc + '\n<link rel="stylesheet"', 1)
     doc = re.sub(r'<header id="entete".*?</header>', lambda m: entete(page), doc, count=1, flags=re.S)
@@ -142,6 +145,7 @@ for f, page in PAGES.items():
 # ---------- pages projet ----------
 modele = (R / "outils/modele-projet.html").read_text(encoding="utf-8")
 for p in P:
+    if p["id"] in PAGE_DEDIEE: continue
     pct = min(100, round(p["collecte"] / p["objectif"] * 100)) if p.get("objectif") else None
     vis = (f'<img src="assets/{p["image"]}" alt="{e(p.get("alt") or "Action de terrain de Cœur en Action : " + p["domaine"].lower())}">' if p.get("image")
            else f'<div class="couverture" style="background:{p["couleur"]};font-size:clamp(3rem,9vw,6rem)">{e(p["domaine"])}</div>')
@@ -170,7 +174,7 @@ for p in P:
                               + json.dumps(D, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
 
 # ---------- robots, sitemap, llms ----------
-urls = [""] + [f for f in PAGES if f != "index.html"] + [f'projet-{p["id"]}.html' for p in P]
+urls = [""] + [f for f in PAGES if f != "index.html"] + [f'projet-{p["id"]}.html' for p in P if p["id"] not in PAGE_DEDIEE]
 (R / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                + "".join(f"  <url><loc>{BASE + u}</loc><lastmod>{C['majLe']}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
 (R / "robots.txt").write_text(("# Version de démonstration : les pages portent une balise noindex tant que DEMO = true\n" if C["DEMO"] else "")
@@ -182,10 +186,11 @@ urls = [""] + [f for f in PAGES if f != "index.html"] + [f'projet-{p["id"]}.html
                             + "".join(f"- [{t}]({BASE}{h}): {d}\n" for h, t, d in [
                                 ("projets.html", "Nos projets", "tous les projets et l'avancement des collectes"),
                                 ("don.html", "Faire un don", "don unique ou mensuel, zakat, sadaqa, sadaqa jariya"),
+                                ("parrainage.html", "Parrainer un orphelin", "kafala : don mensuel pour la nourriture, la scolarité et les soins d'un enfant orphelin"),
                                 ("zakat.html", "Calculateur de zakat", "calcul de la zakat al-maal (nisab, 2,5 %) et zakat al-fitr"),
                                 ("a-propos.html", "Qui sommes-nous", "fondateurs, transparence, questions fréquentes"),
                                 ("contact.html", "Contact", "téléphone, e-mail, adresse, bénévolat")])
-                            + "\n## Projets\n\n" + "".join(f"- [{p['titre']}]({BASE}projet-{p['id']}.html): {p['resume']}\n" for p in P), encoding="utf-8")
+                            + "\n## Projets\n\n" + "".join(f"- [{p['titre']}]({BASE}{lien_projet(p)}): {p['resume']}\n" for p in P), encoding="utf-8")
 # ---------- en-têtes de sécurité (appliqués par Vercel) ----------
 import hashlib, base64
 hashes = set()
