@@ -82,7 +82,9 @@ window.CEA = {
   "majLe": "2026-11-25",
   "paiementEnLigne": false,
   "creeLe": "2025-01-20",
-  "parrainageMensuel": null
+  "parrainageMensuel": null,
+  "banque": "Beobank",
+  "bic": "CTBKBEBX"
  },
  "projets": [
   {

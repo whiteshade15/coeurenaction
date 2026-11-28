@@ -48,7 +48,7 @@ def pied():
             f'<div><h2>Nous suivre</h2><ul><li><a href="{r["facebook"]}" rel="noopener">Facebook</a></li><li><a href="{r["instagram"]}" rel="noopener">Instagram</a></li>'
             f'<li><a href="{r["tiktok"]}" rel="noopener">TikTok</a></li><li><a href="mailto:{C["email"]}">{C["email"]}</a></li></ul></div>'
             f'</div><small>© {datetime.date.today().year} {e(C["nom"])}{" — BCE " + C["bce"] if C.get("bce") else ""} — {e(C["adresse"])}. '
-            f'IBAN {C["iban"]}. Tous droits réservés. · <a href="a-propos.html#confidentialite">Vie privée</a></small></div></footer>')
+            f'IBAN {C["iban"]}' + (f' ({C["banque"]}, BIC {C["bic"]})' if C.get("bic") else '') + '. Tous droits réservés. · <a href="a-propos.html#confidentialite">Vie privée</a></small></div></footer>')
 
 PAGE_DEDIEE = {"orphelins": "parrainage.html"}
 lien_projet = lambda p: PAGE_DEDIEE.get(p["id"], f'projet-{p["id"]}.html')
