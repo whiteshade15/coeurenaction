@@ -4,7 +4,7 @@ window.CEA = {
   "DEMO": true,
   "nom": "Cœur en Action ASBL",
   "iban": "BE62 9502 3442 2861",
-  "bce": null,
+  "bce": "1018.931.055",
   "agrementFiscal": false,
   "tauxReduction": 0.3,
   "seuilAttestation": 40,
@@ -16,7 +16,7 @@ window.CEA = {
    "+32 477 30 54 41",
    "+32 465 90 95 51"
   ],
-  "adresse": "Rue Stroobants 62, 1140 Bruxelles",
+  "adresse": "Rue Stroobants 62 bte 86, 1140 Evere",
   "reseaux": {
    "facebook": "https://www.facebook.com/coeurenactionasbl",
    "instagram": "https://www.instagram.com/coeur_en_action_asbl",
@@ -80,7 +80,8 @@ window.CEA = {
   ],
   "baseUrl": "https://whiteshade15.github.io/coeurenaction/v2/",
   "majLe": "2026-11-25",
-  "paiementEnLigne": false
+  "paiementEnLigne": false,
+  "creeLe": "2025-01-20"
  },
  "projets": [
   {

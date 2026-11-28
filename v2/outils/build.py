@@ -69,9 +69,10 @@ def carte(p, titre="h3"):
 def org():
     o = {"@type": "NGO", "@id": BASE + "#asbl", "name": C["nom"], "url": BASE, "logo": BASE + "assets/logo.svg",
          "email": C["email"], "telephone": [t.replace(" ", "") for t in C["tel"]],
-         "address": {"@type": "PostalAddress", "streetAddress": "Rue Stroobants 62", "postalCode": "1140", "addressLocality": "Bruxelles", "addressCountry": "BE"},
+         "address": {"@type": "PostalAddress", "streetAddress": "Rue Stroobants 62 bte 86", "postalCode": "1140", "addressLocality": "Evere", "addressCountry": "BE"},
          "areaServed": ["Belgique", "International"], "sameAs": list(C["reseaux"].values())}
-    if C.get("bce"): o["taxID"] = C["bce"]
+    if C.get("bce"): o["taxID"] = "BE" + C["bce"].replace(".", "")
+    if C.get("creeLe"): o["foundingDate"] = C["creeLe"]
     return o
 
 def faq_schema(doc):
