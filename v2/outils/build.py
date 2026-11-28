@@ -143,7 +143,7 @@ for f, page in PAGES.items():
 modele = (R / "outils/modele-projet.html").read_text(encoding="utf-8")
 for p in P:
     pct = min(100, round(p["collecte"] / p["objectif"] * 100)) if p.get("objectif") else None
-    vis = (f'<img src="assets/{p["image"]}" alt="Action de terrain de Cœur en Action : {e(p["domaine"].lower())}">' if p.get("image")
+    vis = (f'<img src="assets/{p["image"]}" alt="{e(p.get("alt") or "Action de terrain de Cœur en Action : " + p["domaine"].lower())}">' if p.get("image")
            else f'<div class="couverture" style="background:{p["couleur"]};font-size:clamp(3rem,9vw,6rem)">{e(p["domaine"])}</div>')
     jauge = (f'<div class="jauge" role="progressbar" aria-label="Collecte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{pct}"><span data-pct="{pct}"></span></div>'
              f'<div class="chiffres" style="margin-top:.5rem"><span><strong>{eur(p["collecte"])}</strong> sur {eur(p["objectif"])}</span><span>{p["donateurs"]} donateurs</span></div>') if pct is not None else ""

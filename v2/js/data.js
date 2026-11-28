@@ -90,7 +90,7 @@ window.CEA = {
    "titre": "Forer des puits d'eau potable",
    "lieu": "Afrique de l'Ouest (à préciser)",
    "couleur": "#0E5A8A",
-   "image": null,
+   "image": "puits-inauguration.jpg",
    "resume": "Un puits donne de l'eau propre à tout un village, pour des années.",
    "texte": [
     "L'eau est vitale, mais trop de populations en sont encore privées. Nous forons des puits et installons des systèmes de distribution pour garantir un accès durable à une eau propre.",
@@ -115,7 +115,8 @@ window.CEA = {
      1500,
      "un puits complet, à votre nom ou à celui d'un proche"
     ]
-   ]
+   ],
+   "alt": "Inauguration d'un puits financé en sadaqa jariya : bénévoles de Cœur en Action, villageois et bassines d'eau devant le panneau du projet"
   },
   {
    "id": "colis",
