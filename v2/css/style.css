@@ -247,6 +247,7 @@ legend{font-family:var(--display);font-size:clamp(1.7rem,3vw,2.2rem);margin-bott
 .fondateurs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .fondateurs figure{margin:0;background:var(--sable);border-radius:12px;overflow:hidden}
 .fondateurs img{width:100%;aspect-ratio:330/374;object-fit:cover}
+.fondateurs .initiales{aspect-ratio:330/374;display:grid;place-items:center;background:var(--sable-2);font-family:var(--display);font-size:clamp(4rem,10vw,6.5rem);color:var(--rouge-texte)}
 .fondateurs figcaption{padding:.8rem 1rem 1rem}
 .fondateurs strong{display:block;font-family:var(--display);font-weight:400;font-size:1.8rem;line-height:1}
 .fondateurs span{color:var(--pierre);font-size:.95rem}
